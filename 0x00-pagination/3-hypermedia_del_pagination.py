@@ -63,5 +63,13 @@ class Server:
                     result['index'] = index
             index += 1
         result['page_size'] = len(data)
-        result['next_index'] = index if index < last_index else None
+        if index >= last_index:
+            result['next_index'] = None
+        else:
+            sorted_keys = sorted(
+                filter(lambda x: x >= index, indexed_dataset.keys()))
+            if sorted_keys:
+                result['next_index'] = sorted_keys[0]
+            else:
+                result['next_index'] = None
         return result
