@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
+Copy index_range from the previous task and the following class into your code
+Implement a method named get_page that takes two integer arguments
+page with default value 1 and page_size with default value 10.
 """
 from typing import Tuple, List
 import csv
-import math
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
