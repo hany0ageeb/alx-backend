@@ -80,6 +80,7 @@ class Server:
         data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset())/page_size)
         """
+        takes the same arguments (and defaults) as get_page and returns a dictionary
         Args:
             page(int): page number > 0
             page_size(int): page size > 0
