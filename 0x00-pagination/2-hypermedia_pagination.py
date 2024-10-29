@@ -15,7 +15,7 @@ and returns a dictionary containing the following key-value pairs:
     Make sure to reuse get_page in your implementation.
 
 """
-from typing import Tuple, List, Dict, Union
+from typing import Tuple, List, Dict
 import csv
 import math
 
@@ -31,8 +31,8 @@ and an end index
 orresponding to the range of indexes to return in a list for those particular
 pagination parameters.
     """
-    start_index: int = (page - 1) * page_size
-    end_index: int = start_index + page_size
+    start_index = (page - 1) * page_size
+    end_index = start_index + page_size
     return (start_index, end_index)
 
 
@@ -80,7 +80,8 @@ class Server:
         data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset())/page_size)
         """
-        takes the same arguments (and defaults) as get_page and returns a dictionary
+        takes the same arguments (and defaults) as
+        get_page and returns a dictionary
         Args:
             page(int): page number > 0
             page_size(int): page size > 0
