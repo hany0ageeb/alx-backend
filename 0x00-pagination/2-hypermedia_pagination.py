@@ -77,7 +77,6 @@ class Server:
             self,
             page: int = 1,
             page_size: int = 10) -> Dict:
-        data = self.get_page(page, page_size)
         """
         takes the same arguments (and defaults) as
         get_page and returns a dictionary
@@ -93,6 +92,7 @@ class Server:
             - prev_page: number of the previous page, None if no previous page
             - total_pages(int): the total number of pages in the dataset
         """
+        data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset())/page_size)
         return {
             'page_size': len(data),
