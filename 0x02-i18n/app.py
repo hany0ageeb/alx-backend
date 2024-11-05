@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """7-app.py"""
 import pytz
+import datetime
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
+from flask_babel import format_datetime
 from typing import Union, Dict
 
 
@@ -36,7 +38,7 @@ def get_timezone() -> str:
     try:
         return pytz.timezone(tz).zone
     except pytz.exceptions.UnknownTimeZoneError:
-        return app.config['BABEL_DEFAULT_TMEZONE']
+        return app.config['BABEL_DEFAULT_TIMEZONE']
 
 
 users = {
@@ -57,12 +59,13 @@ def get_user(id: str) -> Union[Dict[str, Union[str, None]], None]:
 def before_request() -> None:
     """before request"""
     setattr(g, 'user', get_user(request.args.get('login_as', 0)))
+    setattr(g, 'time', format_datetime(datetime.datetime.now()))
 
 
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """index"""
-    return render_template('7-index.html')
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
