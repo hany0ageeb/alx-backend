@@ -28,6 +28,7 @@ def get_locale():
 
 @babel.timezoneselector
 def get_timezone():
+    """get_tmezone"""
     return "UTC"
 
 
