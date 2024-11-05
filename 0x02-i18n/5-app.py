@@ -2,6 +2,7 @@
 """5-app.py"""
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
+from typing import Union, Dict
 
 
 class Config:
@@ -33,10 +34,16 @@ users = {
 }
 
 
+def get_user(id: str) -> Union[Dict[str, Union[str, None]], None]:
+    """get_user
+    """
+    return users.get(int(id), 0)
+
+
 @app.before_request
-def before_request():
+def before_request() -> None:
     """before request"""
-    setattr(g, 'user', users.get(int(request.args.get('login_as', 0)), 0))
+    setattr(g, 'user', get_user(request.args.get('login_as', 0)))
 
 
 @app.route('/', strict_slashes=False)
