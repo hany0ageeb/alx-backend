@@ -27,7 +27,9 @@ users = {
 @app.before_request
 def before_request() -> None:
     """before request"""
-    setattr(g, 'user', users.get(int(request.args.get('login_as', 0)), 0))
+    setattr(g,
+            'user',
+            users.get(int(request.args.get('login_as', 0)), 0))
 
 
 @babel.localeselector
