@@ -27,7 +27,7 @@ users = {
 @app.before_request
 def before_request() -> None:
     """before request"""
-    setattr(g, 'user', users.get(int(request.arg.get('login_as', 0)), 0))
+    setattr(g, 'user', users.get(int(request.args.get('login_as', 0)), 0))
 
 
 @babel.localeselector
@@ -38,7 +38,7 @@ def get_locale() -> str:
         return locale
     locale = g.user.get('locale', None) if g.user else None
     if locale and locale in Config.LANGUAGES:
-        return local
+        return locale
     locale = request.accept_languages.best_match(app.config['LANGUAGES'])
     if locale and locale in Config.LANGUAGES:
         return locale
